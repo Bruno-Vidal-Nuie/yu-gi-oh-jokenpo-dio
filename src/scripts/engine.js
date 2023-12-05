@@ -89,6 +89,7 @@ async function setCardsField(cardId) {
     let computerCardId = await getRandomCardId();
 
     await showHiddenCardFieldsImages(true);
+
     await hiddenCasdsDetails();
 
     await drawCrdsInFields(cardId, computerCardId);
@@ -199,6 +200,9 @@ function init() {
 
     drawCards(5, playerSide.player1);
     drawCards(5, playerSide.computer);
+
+    const bgm = document.getElementById('bgm');
+    bgm.play();
 }
 
 init();
