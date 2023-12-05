@@ -13,6 +13,12 @@ const state = {
         player: document.getElementById('player-field-card'),
         computer: document.getElementById('computer-field-card'),
     },
+    playerSide: {
+        player1: 'player-cards',
+        player1BOX: document.querySelector('#computer-cards'),
+        computer: 'computer-cards',
+        computerBOX: document.querySelector('#player-cards'),
+    },
     actions: {
         button: document.getElementById('next-duel'),
     },
@@ -86,12 +92,21 @@ async function setCardsField(cardId) {
     state.fieldCards.computer.style.display = 'block';
 
     state.fieldCards.player.src = cardData[cardId].img;
-    state.fieldCards.computer.src = cardData[cardId].img;
+    state.fieldCards.computer.src = cardData[computerCardId].img;
 
     let duelResults = await checkDuelResult(cardId, computerCardId);
 
     await updateScore();
     await drawButton(duelResults);
+}
+
+async function removeAllCardsImages() {
+    let { computerBOX, player1BOX } = state.playerSide;
+    let imgElements = computerBOX.querySelectorAll('img');
+    imgElements.forEach((img) => img.remove());
+
+    imgElements = player1BOX.querySelectorAll('img');
+    imgElements.forEach((img) => img.remove());
 }
 
 async function drawSelectCard(index) {
